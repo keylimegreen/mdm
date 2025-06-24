@@ -24,7 +24,7 @@ jobs:
         run: npm ci
 
       - name: Build project
-        run: npm start  # or `npm start` if it's dev, but `build` is typical for CI
+        run: npm build  # or `npm start` if it's dev, but `build` is typical for CI
 
       - name: Archive production build
         if: success()
