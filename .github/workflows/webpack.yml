@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: main
   workflow_dispatch:
+
+permissions:
+  contents: write      # Needed to write to gh-pages branch
+  id-token: write 
+  
 jobs:
   build:
     runs-on: ubuntu-latest
