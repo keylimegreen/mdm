@@ -1,0 +1,32 @@
+{
+    "U Mass": {
+        "keywords": ["U", "UNIVERSITY", "MASS"],
+        "phone-num": "508-334-4111",
+        "address": "55 Lake Avenue North (Memorial)",
+        "city": "Worcester"
+    }, 
+    "Beth Israel/BIDMC": {
+        "keywords": ["BETH", "ISRAEL", "BIDMC"],
+        "phone-num": "617-754-2494",
+        "address": "330 Brookline Avenue",
+        "city": "Boston"
+    }, 
+    "Brigham": {
+        "keywords": ["BRIGHAM", "WOMEN", "BW"],
+        "phone-num": "617-732-8903",
+        "address": "75 Francis Street",
+        "city": "Boston"
+    }, 
+    "Mass Gen/MGH": {
+        "keywords": ["MGH", "MASS GEN", "MASS", "GENERAL"],
+        "phone-num": "617-724-3890",
+        "address": "55 Fruit Street",
+        "city": "Boston"
+    }, 
+    "Lahey": {
+        "keywords": ["LAHEY", "BILAHEY"],
+        "phone-num": "781-744-5130",
+        "address": "41 Mall Road",
+        "city": "Burlington"
+    }
+}
