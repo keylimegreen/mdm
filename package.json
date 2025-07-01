@@ -28,7 +28,8 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
-    "bootstrap": "^5.3.7"
+    "bootstrap": "^5.3.7",
+    "speakeasy": "^2.0.0"
   },
   "repository": {
     "type": "git",
