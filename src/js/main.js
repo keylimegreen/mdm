@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     $( "#transfer-search-button").on( "click", function() {
         const input = $("#transfer-search-input").val()
-        searchFn(input,"/transfer-list.json").then(searchObj => {
+        searchFn(input,"./transfer-list.json").then(searchObj => {
             $("#transfer-search-output").empty()
             for(const key in searchObj){
                 
