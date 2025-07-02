@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 module.exports = {
@@ -17,7 +18,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
-  ],
+    new CopyPlugin({
+      patterns: [
+        { from: 'transfer-list.json', to: '.' } // copy JSON to dist/
+      ],
+    }),
+  ], 
   module: {
     rules: [
       {
