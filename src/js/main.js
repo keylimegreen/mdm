@@ -33,7 +33,8 @@ async function searchFn(searchTerm, jsonFile) {
 document.addEventListener('DOMContentLoaded', () => {
     //Log-in modal 
     const logInModal = new bootstrap.Modal(document.getElementById('loginModal'));
-    logInModal.show();
+    
+    //logInModal.show(); 
 
     //Event listener for transfer search
     //const transferSearchButton = new bootstrap.Button(document.getElementById('transfer-search-button'))
@@ -59,5 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 $("#transfer-search-output").append(newDiv)
             }
         });
+    });
+    $('#transfer-search-input').on('keypress', function(e) {
+        if(e.which == 13 || e.keyCode == 13 || e.key === 'Enter') {
+            $("#transfer-search-button").trigger('click')
+        }
+        
     });
 });

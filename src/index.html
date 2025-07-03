@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>MDM website</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <style>
     .navbar-nav .nav-link.active {
       font-weight: bold;
@@ -15,8 +15,7 @@
     }
   </style>
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body class="bg-light">
 
@@ -61,22 +60,38 @@
         </div>
 
         <!-- Discharge Note -->
+        <div class="container">
         <div class="bg-white shadow-sm" id="discharge-section">
           <h2 class="fw-bold">Discharge Notes</h2>
-          <table class="table table-bordered">
-            <thead class="table-light">
-              <tr>
-                <th>Chief Complaint</th>
-                <th>Standardized Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Chest pain</td><td>Chest Pain Note</td></tr>
-              <tr><td>Shortness of breath</td><td>Shortness of Breath Note</td></tr>
-              <tr><td>Abdominal pain</td><td>Abdominal Pain Note</td></tr>
-              <tr><td>Headache</td><td>Headache Note</td></tr>
-            </tbody>
-          </table>
+          <!-- Discharge Note search input -->
+          <div class="input-group mb-3">
+            <input type="text" class="form-control w-50vw" placeholder="search discharge notes" id="discharge-note-search-input" aria-label="search-box" aria-describedby="basic-addon2" >
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="discharge-note-search-button">Search</button>
+            </div>
+          </div>
+            <!-- Discharge Note textbox output -->
+          <div>
+            <h4 class="fw-bold">Discharge Note Output</h4>
+            <textarea placeholder="discharge note output">
+
+            </textarea>
+          </div>
+          <div>
+            <button class="btn btn-outline-secondary" type="button" id="copy-discharge-note-button">Copy</button>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="translateDropdownMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Translate
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" target="_blank" href="https://translate.google.com/?hl=en&sl=en&tl=es&op=translate">Spanish</a>
+                <a class="dropdown-item" target="_blank" href="https://translate.google.com/?hl=en&sl=en&tl=pt&op=translate">Portuguese (Brazil)</a>
+                <a class="dropdown-item" target="_blank" href="https://translate.google.com/?hl=en&sl=en&tl=ht&op=translate">Haitian Creole</a>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
         </div>
          <!-- Edit Section -->
 <div id="edit-section" class="py-5 bg-white shadow-sm">
@@ -91,11 +106,11 @@
     <h2 class="fw-bold mb-4">Transfer Section</h2>
     <div class="container">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="search hospital" id="transfer-search-input" aria-label="search-box" aria-describedby="basic-addon2">
+        <input type="text" class="form-control  w-50vw" placeholder="search hospital" id="transfer-search-input" aria-label="search-box" aria-describedby="basic-addon2" >
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="button" id="transfer-search-button">Search</button>
         </div>
-    </div>
+      </div>
     <!--transfer search result-->
       <div class="fw-bold mb-4" id="transfer-search-output">
 

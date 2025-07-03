@@ -1,0 +1,78 @@
+{
+    "chief-complaint" : 
+    {
+        "chest pain": {
+            "keywords" : ["chest pain", "cp", "chest"],
+            "hpi-constructor": ["age","pmhx", "duration", "location", "severity", "triggers", "quality", "risk-factors"],
+            "pe-constructor": ["gen","head","chest","abd","back","ext", "msk", "neuro", "psych"],
+            "mdm-constructor": ["ekg","acute coronary syndrome","pulmonary embolism","aortic dissection", "boerhaaves","pneumonia", "pneumothorax"],
+            "discharge": "Please return to the emergency room if you develop concerning symptoms including but not limited to worsening chest pain, difficulty breathing, passing out, severe dizziness, or any other new or worsening acute concerns."
+        }
+    },
+    "hpi-contructor": {
+        "age":"Patient is {input}",
+        "pmhx":"with PMHx of {input}",
+        "duration":"Symptoms has lasted {input}",
+        "location":"Localizes the complaint to {input}",
+        "severity":"Rates severity as {input}", 
+        "triggers":"Triggers include {input}", 
+        "quality":"Describes the pain as {input}", 
+        "risk-factors":"Denies risk factors such as {input}",
+        "acute coronary syndrome": ["There is no personal history of cardiac disease. ", " There is no family history of premature cardiac disease. ", " Patient denies significant tobacco use."],
+        "pulmonary embolism": ["Patient denies taking hormones or OCPs. ", "Denies history of cancer. ", "Denies history of VTE. ", "Denies recent immobilization. ", "Denies recent hospitalization, ", " surgery,", " travel."],
+
+    },
+    "mdm-constructor":
+    {
+        "chest xray": ["chest xray were reviewed by me as NAD. "],
+        "radiographs": ["{input} were reviewed by me as NAD. "],
+        "ekg": ["EKG obtained at {input} showed ", "{NSR}", "{no ischemic changes}","{normal intervals}"],
+        "pulmonary embolism": ["PE was considered but based on the following clinical factors felt to be unlikely: ", "not tachycardic" ,"not hypoxic", "no risk factors", "wells score of {input}","negative d-dimer"],
+        "aortic dissection":["AD was considered but based on the clinical factors, felt to be unlikely: ", "normal chest xray without findings suggestive of AD", "duration of symptoms","ADD score of 0"], 
+        "boerhaaves": ["Boerhaaves was considered but no evidence of this based on no crepitus on exam" , "chest xray did not show pneumomediastinum"],
+        "pneumonia":["Careful review of the chest xray showed no evidence of pneumonia","normal wbc", "afebrile", "not hypoxic"],
+        "pneumothorax":["Careful review of the chest xray showed no evidence of ptx. "],
+        "acute coronary syndrome":["ACS was considered but felt to be less likely given ", "atypical symptoms, ", "heart score of {input}"],
+        "appendicitis": ["Patient has no significant abdominal tenderness." , "Patient has tolerated oral intake", "CT scan is negative"]
+    },
+
+    "pe-constructor": 
+    {
+        "gen": ["well appearing", "well dressed","no acute distress", "normal build"],
+        "head": ["atraumatic", "normocephalic"],
+        "eye": ["normal vision","conjunctiva normal","no orbital swelling", "no nystagmus", "EOM intact"],
+        "ear": ["external ear normal","EAC unremarkable","TM unremarkable b/l"],
+        "mouth": ["dentition normal", "normal phonation", "no trimsus", "posterior oropharynx unremarkable", "uvula midline", "tonsils normal", "no peritonsillar swelling"],
+        "nose": ["external nose normal"],
+        "neck": ["no nuchal rigidity"],
+        "chest": ["chest wall nontender","no murmurs, rubs, gallops","RRR"],
+        "abd": ["no abdominal tenderness", "no distention", "no masses", "no hernias"],
+        "back": ["no focal midline spinal tenderness", "no cva tenderness b/l"],
+        "ext": ["no tendenress", "no swelling", "normal ROM", "no palp masses", "compartments are soft", "peripheral pulses normal"], 
+        "msk": ["normal muscle tone", "normal gait"],
+        "neuro":["alert", "oriented x3", "no gross weakness", "face symmetric"],
+        "skin": ["no rashes", "no wounds", "no lesions"],
+        "stroke_neuro":["alert", "oriented x3", "CN2-12 intact", "normal sensation x4", "normal strength 5/5 in bilateral upper and lower extremity proximal and distal extremities", "normal FTN b/l - no ataxia"],
+        "ped_neuro": "developmentally appropriate tone, reflexes, gross strength. limited exam due to age",
+        "psych":["no agitation", "normal mood/affect", "no suicidal ideation"],
+        "ped_psych":"developmentally appropriate mood, affect"
+    },
+    "pe-flip": {
+        "well appearing": ["acutely ill appearing", "chronically ill appearing", "well appearing"],
+        "well dressed": ["umkempt","well dressed"],
+        "normal build": ["thin and emaciated", "normal build"],
+        "no acute distress": ["mild distress", "severe distress", "no acute distress"],
+        "no nuchal rigidity": ["no nuchal rigidity, neg brudzinski/kernig sign", "nuchal rigidity present", "no nuchal rigidity"],
+        "alert":["drowsy","lethargic","obtunded","comatose","alert"]
+
+    
+    },
+    "discharge-constructor": {
+        "Incidental radiology findings": "Please note that during the course of your emergency room visit we found an indeterminate lesion on your radiology diagnostic testing today. Outpatient follow-up imaging is necessary to further evaluate indeterminate findings identified during emergency radiology studies. These findings may represent early or subtle pathology not fully characterized in the acute setting. Timely follow-up ensures accurate diagnosis, guides appropriate treatment, and helps detect or rule out serious conditions, such as malignancy or evolving disease, that may not be apparent initially.",
+        "Abnormal laboratory findings": "Please note that during the course of your emergency room visit we also found mildly abnormal labotory values. Outpatient follow-up for mildly abnormal laboratory findings is important to monitor for progression, resolution, or emerging disease. These results may indicate early signs of an underlying condition that is not yet clinically apparent. Repeat testing or further evaluation ensures accurate diagnosis, guides management, and helps prevent potential complications.",
+        "Pending tests": "There are diagnostic tests still pending, which may take a few days to result. If any results are concerning or require follow-up, we will contact you at the phone number you provided."
+    }
+    
+
+
+}
