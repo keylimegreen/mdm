@@ -15,6 +15,13 @@ module.exports = {
     static: path.resolve(__dirname, 'dist'),
     port: 8080,
     hot: true,
+    proxy: [
+      {
+        context: ['/api'],
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './src/index.html' }),
@@ -22,9 +29,8 @@ module.exports = {
       patterns: [
         { from: 'transfer-list.json', to: '.' }, // copy JSON to dist/
         { from: 'mdm-database.json', to: '.' } // copy mdm-database to dist/
-      ],
-    }),
-  ], 
+      ],}),
+  ],
   module: {
     rules: [
       {
@@ -52,7 +58,14 @@ module.exports = {
               },
             },
           },
-          'sass-loader',
+          'sass-loader', {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                quietDeps: true
+              }
+            }
+          }
         ],
       },
     ],

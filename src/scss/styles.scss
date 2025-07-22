@@ -1,5 +1,17 @@
-@import "bootstrap/scss/bootstrap";
+@use "bootstrap/scss/bootstrap";
 
 .w-50vw {
     width: 50vw;
   }
+
+.js-x-close {
+    
+}
+
+.container {
+  display: flex; /* Or display: grid; */
+}
+
+.container input {
+  flex-grow: 1; /* Makes the input take up available space */
+}

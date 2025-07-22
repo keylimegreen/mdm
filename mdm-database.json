@@ -19,7 +19,7 @@
         "quality":"Describes the pain as {input}", 
         "risk-factors":"Denies risk factors such as {input}",
         "acute coronary syndrome": ["There is no personal history of cardiac disease. ", " There is no family history of premature cardiac disease. ", " Patient denies significant tobacco use."],
-        "pulmonary embolism": ["Patient denies taking hormones or OCPs. ", "Denies history of cancer. ", "Denies history of VTE. ", "Denies recent immobilization. ", "Denies recent hospitalization, ", " surgery,", " travel."],
+        "pulmonary embolism": ["Patient denies taking hormones or OCPs. ", "Denies history of cancer. ", "Denies history of VTE. ", "Denies recent immobilization. ", "Denies recent hospitalization, ", " surgery,", " travel."]
 
     },
     "mdm-constructor":
@@ -68,11 +68,104 @@
     
     },
     "discharge-constructor": {
-        "Incidental radiology findings": "Please note that during the course of your emergency room visit we found an indeterminate lesion on your radiology diagnostic testing today. Outpatient follow-up imaging is necessary to further evaluate indeterminate findings identified during emergency radiology studies. These findings may represent early or subtle pathology not fully characterized in the acute setting. Timely follow-up ensures accurate diagnosis, guides appropriate treatment, and helps detect or rule out serious conditions, such as malignancy or evolving disease, that may not be apparent initially.",
+        "Incidental radiology findings": "Please note that during the course of your emergency room visit we found an indeterminate lesion on your radiology diagnostic testing today. Outpatient follow-up imaging is necessary to further evaluate indeterminate findings identified during emergency radiology studies. These findings may represent early or subtle pathology not fully characterized in the acute setting. Timely follow-up ensures accurate diagnosis, guides appropriate treatment, and helps detect or rule out serious conditions, such as malignancy or evolving disease, that may not be apparent initially. The follow findings need to be followed up on: []",
         "Abnormal laboratory findings": "Please note that during the course of your emergency room visit we also found mildly abnormal labotory values. Outpatient follow-up for mildly abnormal laboratory findings is important to monitor for progression, resolution, or emerging disease. These results may indicate early signs of an underlying condition that is not yet clinically apparent. Repeat testing or further evaluation ensures accurate diagnosis, guides management, and helps prevent potential complications.",
-        "Pending tests": "There are diagnostic tests still pending, which may take a few days to result. If any results are concerning or require follow-up, we will contact you at the phone number you provided."
+        "Pending tests": "There are diagnostic tests still pending, which may take a few days to result. If any results are concerning or require follow-up, we will contact you at the phone number you provided. The following tests are pending: []."
+        },
+    "discharge-diagnosis": {
+        "chest pain": {
+            "keywords": ["chest", "cp", "chest pain"],
+            "summary": "You were evaluated in the emergency department for chest pain. Your tests do not show a heart attack or other emergency at this time. However, chest pain can have many causes. Return to the ED if you develop worsening or new chest pain, trouble breathing, fainting, weakness, numbness, slurred speech, or a fast or irregular heartbeat. Avoid strenuous activity until cleared. Follow up with your primary care physician within 3–5 days to review your evaluation and plan further care."
+        },            
+        "diverticulitis": {
+            "keywords": ["diverticulitis"], 
+            "summary": "You were treated in the emergency department for diverticulitis, which is inflammation or infection of small pouches in your colon. You have been prescribed antibiotics and may need to follow a low-fiber or clear liquid diet temporarily. Return to the ED if you experience worsening abdominal pain, fever, vomiting, inability to eat or drink, or signs of spreading infection. Gradually resume a regular diet as tolerated. Follow up with your primary care physician within 2–3 days to assess your response to treatment and determine if further imaging or specialist referral is needed. You will likely need to follow up with a gastroenterologist for possible colonoscopy once your symptoms have improved."
+        }, 
+        "shortness of breath": {
+            "keywords": ["sob","shortness of breath","short"],
+            "summary": "You were evaluated today for shortness of breath and are currently stable for discharge. Return to the emergency department immediately if you experience worsening shortness of breath, chest pain or pressure, dizziness, fainting, confusion, high fever, signs of infection, swelling in your legs, or sudden weight gain. Please follow up with your primary care physician within 3–5 days for further evaluation and management; bring a copy of your discharge paperwork. Avoid strenuous activity until cleared by your doctor and take all prescribed medications as directed. If any concerns arise before your follow-up, seek medical attention promptly."
+        },
+        "pulmonary embolism": {
+            "keywords": ["pe","pulmonary embolism"],
+            "summary": "You were evaluated and diagnosed with a pulmonary embolism and are being discharged in stable condition. You have been prescribed an anticoagulant (blood thinner), which is essential to prevent further clots—take it exactly as directed and do not miss any doses. Monitor closely for signs of bleeding, including unusual bruising, blood in urine or stool, coughing or vomiting blood, or prolonged bleeding from cuts. Avoid any activities that increase your risk of injury, especially head trauma. Return to the emergency department immediately if you experience severe chest pain, worsening shortness of breath, dizziness, fainting, or signs of significant bleeding. Follow up with your primary care physician or specialist within 3 days for continued management. Seek urgent care if any concerns arise before your follow-up."
+        },
+        "abdominal pain": {
+            "keywords": ["abdominal pain", "abd", "abdominal"],
+            "summary": "You were evaluated today for abdominal pain and are being discharged in stable condition. At this time, no emergency cause was identified, but it is important to monitor your symptoms closely. Return to the emergency department immediately if your pain worsens, becomes severe or constant, if you develop fever, vomiting (especially if persistent or with blood), inability to eat or drink, bloating, yellowing of the skin or eyes, or blood in your stool or urine. Follow up with your primary care physician within 3–5 days or sooner if symptoms persist or worsen. Avoid heavy meals, alcohol, and strenuous activity until your pain resolves. Take any prescribed medications as directed and seek medical attention if you have any new or concerning symptoms."
+        },
+        "hematuria": {
+            "keywords": ["hematuria"],
+            "summary": "You were evaluated today for hematuria (blood in the urine) and are being discharged in stable condition. At this time, an immediately serious cause has not been identified, but further outpatient evaluation is necessary. Return to the emergency department immediately if you experience worsening blood in the urine, inability to urinate, severe abdominal or flank pain, fever, chills, vomiting, or signs of weakness or dizziness. Follow up with your primary care physician or urologist within 3–5 days for further evaluation, including possible cystoscopy to rule out a tumor or other reasons for why you are bleeding. Avoid strenuous activity and stay well hydrated. Take any prescribed medications as directed and monitor your symptoms closely. Seek medical care if new or worsening symptoms develop."
+        },
+        "animal bite": {
+            "keywords": ["animal bite"],
+            "summary": "You were evaluated today for an animal bite and are being discharged in stable condition. The wound has been cleaned and treated as needed. Continue to monitor the area for signs of infection, including increasing redness, swelling, warmth, pus, or worsening pain. Return to the emergency department immediately if you develop fever, spreading redness, difficulty moving the affected area, or if the wound reopens or worsens. Keep the wound clean and dry; follow any wound care instructions provided. Take all prescribed medications, including antibiotics, exactly as directed. If advised, please follow up with the owner of the animal or animal control regarding the rabies status of the animal to see if you need to return for rabies treatment. See your primary care physician within 1–2 days for wound reassessment and continued care. Seek medical attention sooner if concerns arise."
+        },
+        "back pain": {
+            "keywords": ["back", "back pain"],
+            "summary": "You were evaluated today for back pain and are being discharged in stable condition. At this time, no emergency cause has been identified, but it’s important to monitor your symptoms closely. Return to the emergency department immediately if you experience worsening or severe pain, new weakness or numbness in your legs, loss of bladder or bowel control, fever, or difficulty walking. Avoid heavy lifting, prolonged sitting or standing, and strenuous activity until symptoms improve. Use any prescribed or recommended medications as directed for pain relief. Apply ice or heat as needed. Follow up with your primary care physician within 3–5 days for further evaluation and management. Seek medical care sooner if symptoms worsen or new concerns arise."
+        }
+    },
+    "transfer-list": {
+            "U Mass": {
+                "keywords": ["U", "UNIVERSITY", "MASS", "UMASS"],
+                "phone-num": "508-334-4111",
+                "address": "55 Lake Avenue North (University)/ 119 Belmont St (Memorial)",
+                "city": "Worcester"
+            }, 
+            "Beth Israel/BIDMC": {
+                "keywords": ["BETH", "ISRAEL", "BIDMC"],
+                "phone-num": "617-754-2494",
+                "address": "330 Brookline Avenue",
+                "city": "Boston"
+            }, 
+            "Brigham": {
+                "keywords": ["BRIGHAM", "WOMEN", "BW"],
+                "phone-num": "617-732-8903",
+                "address": "75 Francis Street",
+                "city": "Boston"
+            }, 
+            "Mass Gen/MGH": {
+                "keywords": ["MGH", "MASS GEN", "MASS", "GENERAL"],
+                "phone-num": "617-724-3890",
+                "address": "55 Fruit Street",
+                "city": "Boston"
+            }, 
+            "Lahey": {
+                "keywords": ["LAHEY", "BILAHEY"],
+                "phone-num": "781-744-5130",
+                "address": "41 Mall Road",
+                "city": "Burlington"
+            },
+            "Brown Health": {
+                "keywords": ["BROWN", "RHODE", "ISLAND", "RIH"],
+                "phone-num": "401-444-3000",
+                "address": "593 Eddy St",
+                "city": "Providence"
+            }, 
+            "Yale New Haven": {
+                "keywords": ["YALE", "NEW", "HAVEN"],
+                "phone-num": "888-964-4233",
+                "address": "20 York Street",
+                "city": "New Haven"
+            }, 
+            "BMC": {
+                "keywords": ["BMC", "BOSTON", "MEDICAL", "CENTER"],
+                "phone-num": "617-638-5795 #1111",
+                "address": "725 Albany Street",
+                "city": "Boston"
+            },
+            "ST VINCENTS HOSPITAL": {
+                "keywords": ["ST", "VINCENTS", "STV", "SVH"],
+                "phone-num": "",
+                "address": "123 Summer Street",
+                "city": "Worcester"
+            }, 
+            "BMC BRIGHTON / ST ELIZABETHS": {
+                "keywords": ["ST", "ELIZABETH", "E", "BMC", "BRIGHTON", "ELIZABETHS"],
+                "phone-num": "617.789.3000 (need to update)",
+                "address": "255 Washington St",
+                "city": "Brighton"
+            }
+        }
     }
-    
-
-
-}

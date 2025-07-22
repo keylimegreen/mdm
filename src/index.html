@@ -5,6 +5,7 @@
   <title>MDM website</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <style>
     .navbar-nav .nav-link.active {
       font-weight: bold;
@@ -14,8 +15,7 @@
       border-radius: 4px;
     }
   </style>
-  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  
 </head>
 <body class="bg-light">
 
@@ -30,10 +30,10 @@
         <ul class="navbar-nav ms-auto" id="navbarNav">
           <li class="nav-item"><a class="nav-link" href="#mdm-section">MDM</a></li>
           <li class="nav-item"><a class="nav-link" href="#discharge-section">Discharge</a></li>
-          <li class="nav-item"><a class="nav-link" href="#edit-section">Edit</a></li>
           <li class="nav-item"><a class="nav-link" href="#transfer-section">Transfer</a></li>
+          <li class="nav-item"><a class="nav-link" href="#edit-section">Edit</a></li>
         </ul>
-        <a class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</a>
+        <button class="btn btn-primary ms-3" id="website-head-login-btn">Log in</button>
       </div>
     </div>
   </nav>
@@ -62,44 +62,44 @@
         <!-- Discharge Note -->
         <div class="container">
         <div class="bg-white shadow-sm" id="discharge-section">
-          <h2 class="fw-bold">Discharge Notes</h2>
           <!-- Discharge Note search input -->
           <div class="input-group mb-3">
-            <input type="text" class="form-control w-50vw" placeholder="search discharge notes" id="discharge-note-search-input" aria-label="search-box" aria-describedby="basic-addon2" >
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="discharge-note-search-button">Search</button>
-            </div>
-          </div>
-            <!-- Discharge Note textbox output -->
-          <div>
-            <h4 class="fw-bold">Discharge Note Output</h4>
-            <textarea placeholder="discharge note output">
-
-            </textarea>
-          </div>
-          <div>
-            <button class="btn btn-outline-secondary" type="button" id="copy-discharge-note-button">Copy</button>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="translateDropdownMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Translate
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" target="_blank" href="https://translate.google.com/?hl=en&sl=en&tl=es&op=translate">Spanish</a>
-                <a class="dropdown-item" target="_blank" href="https://translate.google.com/?hl=en&sl=en&tl=pt&op=translate">Portuguese (Brazil)</a>
-                <a class="dropdown-item" target="_blank" href="https://translate.google.com/?hl=en&sl=en&tl=ht&op=translate">Haitian Creole</a>
+            <H3>Discharge Note Search</h3>
+            <div>
+              <input class="form-control" list="discharge-datalist-options" id="discharge-datalist-input" placeholder="Type to search...">
+              <datalist id="discharge-datalist-options"></datalist>
+              <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="discharge-note-search-btn">Search</button>
               </div>
             </div>
           </div>
+          <div id="discharge-search-result-group"></div>
+          <form id="discharge-checkbox-group"></form>
+            <!-- Discharge Note textbox output -->
+          <div>
+            <h4 class="fw-bold">Discharge Note Output</h4>
+            <textarea class="w-100" placeholder="discharge note output" id="discharge-note-output"></textarea>
+          </div>
+          <!--Discharge Note Copy and Translate buttons-->
+          <div>
+            <button class="btn btn-outline-secondary" type="button" id="create-discharge-note-btn">Create</button>
+            <button class="btn btn-outline-secondary" type="button" id="discharge-clear-note-btn">Clear</button>
+            <button class="btn btn-outline-secondary" type="button" id="copy-discharge-note-btn" >Copy</button>
+          
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="translateDropdownMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Translate
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="translateDropdownMenu">
+                <li><a class="dropdown-item" target="_blank" href="https://translate.google.com/?hl=en&sl=en&tl=es&op=translate">Spanish</a></li>
+                <li><a class="dropdown-item" target="_blank" href="https://translate.google.com/?hl=en&sl=en&tl=pt&op=translate">Portuguese (Brazil)</a></li>
+                <li><a class="dropdown-item" target="_blank" href="https://translate.google.com/?hl=en&sl=en&tl=ht&op=translate">Haitian Creole</a></li>
+              </ul>
+            </div>
+          </div>
           </div>
         </div>
-        </div>
-         <!-- Edit Section -->
-<div id="edit-section" class="py-5 bg-white shadow-sm">
-  <div class="container">
-    <h2 class="fw-bold mb-4">Edit Section</h2>
-    <p>This section is dedicated to editing.</p>
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModalll">Open Transfer Modal</button>
-  </div>
+        
+        
 <!-- Transfer Section -->
 <div id="transfer-section" class="py-5 bg-white shadow-sm">
   <div class="container">
@@ -120,8 +120,46 @@
       </div>
     </div>
   
+ <!-- Edit Section -->
+ <section id="edit-section" class="py-5">
+  <div class="container bg-white shadow-sm p-4 rounded">
+    <h2 class="section-title">Edit Section</h2>
+    <p>Edit the Medical Decision Making (MDM) or Discharge Instruction backend data below:</p>
 
+    <div class="mb-4">
+      <label for="mdm-backend-editor" class="form-label">MDM Database Editor</label>
+      <textarea id="mdm-backend-editor" class="form-control" placeholder="Edit MDM backend JSON or content here..."></textarea>
+      <button class="btn btn-outline-secondary mt-2" type="button">Save MDM Changes</button>
+    </div>
 
+    <div class="mb-4">
+      <label for="discharge-backend-editor" class="form-label">Discharge Instruction Editor</label>
+      <div class="input-group">
+      <input class="form-control" list="edit-discharge-datalist-options" id="edit-discharge-datalist-input" placeholder="Type to search diagnosis...">
+              <datalist id="edit-discharge-datalist-options"></datalist>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="edit-discharge-search-btn">Search</button>
+                
+              </div>
+              
+            </div>
+            <div id='edit-discharge-search-message-box'></div>
+              <form id="editDischargeForm">
+              <div class="btn-group " role="group" >
+                <input type="radio" class="btn-check" name="editDischargeForm" id="edit-radio-btn" value="edit" autocomplete="off">
+                <label class="btn btn-outline-primary" for="edit-radio-btn">Edit Diagnosis</label>
+                <input type="radio" class="btn-check" name="editDischargeForm" id="add-radio-btn" value="add" autocomplete="off">
+                <label class="btn btn-outline-primary" for="add-radio-btn">Add Diagnosis</label>
+                
+              </div>
+              <div><label>Keywords: </label><input class="w-100" type="text" id="edit-keyword-discharge-dx-input" placeholder="input keywords separated by commas"></div>
+              
+      <textarea id="discharge-editor-textarea" class="form-control" placeholder="Edit discharge backend JSON or content here..."></textarea>
+      <button class="btn btn-outline-secondary mt-2" type="button" id="save-discharge-btn">Save Discharge Changes</button>
+    </form>
+    </div>
+  </div>
+</section>
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -129,25 +167,36 @@
       
       <div class="modal-header">
         <h5 class="modal-title" id="loginModalLabel">Log In</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body">
         <form>
           <div class="mb-3">
-            <label for="loginEmail" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com">
+            <label for="usernameInput" class="form-label">ID</label>
+            <input type="text" class="form-control" id="usernameInput" placeholder="user">
           </div>
           <div class="mb-3">
             <label for="loginPassword" class="form-label">Password</label>
-            <input type="password" class="form-control" id="loginPassword" placeholder="••••••••">
+            <input type="password" class="form-control" id="passwordInput" placeholder="••••••••">
           </div>
+          <div id="loginError" class="text-danger d-none">Invalid credentials</div>
         </form>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Log In</button>
+        <form id="shiftHours">
+          <div class="btn-group" role="group" aria-label="Shift hours">
+            <input type="radio" class="btn-check" name="shiftHours" id="shift8" value="8" autocomplete="off">
+            <label class="btn btn-outline-primary" for="shift8">8 Hour</label>
+        
+            <input type="radio" class="btn-check" name="shiftHours" id="shift10" value="10" autocomplete="off">
+            <label class="btn btn-outline-primary" for="shift10">10 Hour</label>
+        
+            <input type="radio" class="btn-check" name="shiftHours" id="shift12" value="12" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="shift12" >12 Hour</label>
+          </div>
+        </form>
+        <button type="button" class="btn btn-primary" id="login-form">Log In</button>
       </div>
 
     </div>
@@ -155,24 +204,5 @@
 </div>
 </div>
 </section>
-<!-- Modal -->
-<div class="modal fade" id="loginModalll" data-bs-backdrop="static" data-bs-keyboard="false" show="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Welcome to MDM Machine</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Please enter your password to continue.
-        <input type="password" class="form-control mt-2" placeholder="Password">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        
-      </div>
-    </div>
-  </div>
-</div>
 </body>
 </html>
