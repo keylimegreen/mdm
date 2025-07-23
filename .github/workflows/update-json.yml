@@ -1,0 +1,28 @@
+name: Update JSON File
+
+on:
+  workflow_dispatch:
+    inputs:
+      jsonContent:
+        description: 'JSON content to write'
+        required: true
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Write JSON to file
+        run: echo '${{ github.event.inputs.jsonContent }}' > mdm-database.json
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add mdm-database.json
+          git commit -m "Update JSON via workflow"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}

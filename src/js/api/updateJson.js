@@ -1,24 +1,26 @@
-// src/js/api/updateJson.js
-
-export async function updateJsonOnGitHub(newJson) {
-    const response = await fetch('/api/update-json', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        repo: 'your-repo-name',
-        path: 'data.json',
-        branch: 'main',
-        newJson: newJson
-      })
-    });
+async function updateJsonOnGitHub(newJson) {
+    const response = await fetch(
+      'https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO/actions/workflows/update-json.yml/dispatches',
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/vnd.github+json',
+          'Authorization': 'Bearer YOUR_GITHUB_TOKEN', // see security notes!
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ref: 'main', // branch name to trigger on
+          inputs: {
+            jsonContent: JSON.stringify(newJson),
+          }
+        }),
+      }
+    );
   
     if (!response.ok) {
-      const err = await response.json();
-      throw new Error(err.error || 'Failed to update JSON');
+      const errorText = await response.text();
+      throw new Error('Failed to trigger workflow: ' + errorText);
     }
-  
-    return await response.json();
+    console.log('Workflow triggered!');
   }
   
