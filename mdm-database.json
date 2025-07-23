@@ -22,11 +22,7 @@
         "pulmonary embolism": ["Patient denies taking hormones or OCPs. ", "Denies history of cancer. ", "Denies history of VTE. ", "Denies recent immobilization. ", "Denies recent hospitalization, ", " surgery,", " travel."]
 
     },
-    "mdm-constructor":
-    {
-        "chest xray": ["chest xray were reviewed by me as NAD. "],
-        "radiographs": ["{input} were reviewed by me as NAD. "],
-        "ekg": ["EKG obtained at {input} showed ", "{NSR}", "{no ischemic changes}","{normal intervals}"],
+    "mdm-differential": {
         "pulmonary embolism": ["PE was considered but based on the following clinical factors felt to be unlikely: ", "not tachycardic" ,"not hypoxic", "no risk factors", "wells score of {input}","negative d-dimer"],
         "aortic dissection":["AD was considered but based on the clinical factors, felt to be unlikely: ", "normal chest xray without findings suggestive of AD", "duration of symptoms","ADD score of 0"], 
         "boerhaaves": ["Boerhaaves was considered but no evidence of this based on no crepitus on exam" , "chest xray did not show pneumomediastinum"],
@@ -34,6 +30,18 @@
         "pneumothorax":["Careful review of the chest xray showed no evidence of ptx. "],
         "acute coronary syndrome":["ACS was considered but felt to be less likely given ", "atypical symptoms, ", "heart score of {input}"],
         "appendicitis": ["Patient has no significant abdominal tenderness." , "Patient has tolerated oral intake", "CT scan is negative"]
+    },
+    "mdm-constructor":
+    {
+        "Collateral Info": ["patient", "family", "chart", "EMS"],
+        "Differential": "Differential diagnosis considered includes {} amongnst other emergent pathology.",
+        "Chest XR": "Chest xray were reviewed by me as NAD. ",
+        "Radiographs": "{input} were reviewed by me as NAD. ",
+        "Reviewing CT": "Ct scans were reviewed by me and I agree with the radiologist interpretation",
+        "EKG": ["EKG obtained at {input} showed ", ["NSR","A fib","sinus tachy", "sinus brady"], ["no ischemic changes","nonspecific changes", "ST depressions", "ST elevations"],["normal intervals","prolonged QRS", "prolonged QT", "first degree block"]],
+        "Testing Deferred": "considered the following tests {} but deferred due to patient preference or shared decision making",
+        "Critical Care": "Critical Care Procedure Note\nAuthorized and Performed by: {MD Name}\nTotal critical care time: Approximately {30} minutes\nDue to a high probability of clinically significant, life threatening deterioration, the patient required my highest level of preparedness to intervene emergently and I personally spent this critical care time directly and personally managing the patient. This critical care time included obtaining a history; examining the patient; pulse oximetry; ordering and review of studies; arranging urgent treatment with development of a management plan; evaluation of patient's response to treatment; frequent reassessment; and, discussions with other providers.\nThis critical care time was performed to assess and manage the high probability of imminent, life-threatening deterioration that could result in multi-organ failure. It was exclusive of separately billable procedures and treating other patients and teaching time."
+        
     },
 
     "pe-constructor": 
@@ -64,8 +72,6 @@
         "no acute distress": ["mild distress", "severe distress", "no acute distress"],
         "no nuchal rigidity": ["no nuchal rigidity, neg brudzinski/kernig sign", "nuchal rigidity present", "no nuchal rigidity"],
         "alert":["drowsy","lethargic","obtunded","comatose","alert"]
-
-    
     },
     "discharge-constructor": {
         "Incidental radiology findings": "Please note that during the course of your emergency room visit we found an indeterminate lesion on your radiology diagnostic testing today. Outpatient follow-up imaging is necessary to further evaluate indeterminate findings identified during emergency radiology studies. These findings may represent early or subtle pathology not fully characterized in the acute setting. Timely follow-up ensures accurate diagnosis, guides appropriate treatment, and helps detect or rule out serious conditions, such as malignancy or evolving disease, that may not be apparent initially. The follow findings need to be followed up on: []",

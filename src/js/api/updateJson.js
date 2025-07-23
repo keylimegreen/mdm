@@ -1,4 +1,4 @@
-async function updateJsonOnGitHub(newJson) {
+export async function updateJsonOnGitHub(newJson) {
     const response = await fetch(
       'https://api.github.com/repos/keylimegreen/mdm/actions/workflows/update-json.yml/dispatches',
       {
