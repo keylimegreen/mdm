@@ -27,7 +27,6 @@ module.exports = {
     new HtmlWebpackPlugin({ template: './src/index.html' }),
     new CopyPlugin({
       patterns: [
-        { from: 'transfer-list.json', to: '.' }, // copy JSON to dist/
         { from: 'mdm-database.json', to: '.' } // copy mdm-database to dist/
       ],}),
   ],
