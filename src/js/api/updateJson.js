@@ -1,6 +1,6 @@
 async function updateJsonOnGitHub(newJson) {
     const response = await fetch(
-      'https://api.github.com/repos/YOUR_USERNAME/YOUR_REPO/actions/workflows/update-json.yml/dispatches',
+      'https://api.github.com/repos/keylimegreen/mdm/actions/workflows/update-json.yml/dispatches',
       {
         method: 'POST',
         headers: {
