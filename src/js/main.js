@@ -1,5 +1,5 @@
-
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { Modal, Dropdown } from 'bootstrap';
 import { updateJsonOnGitHub } from './api/updateJson';
 
@@ -16,7 +16,6 @@ class DischargeNote {
         this._target = dischargeOutputTextArea
         this._dischargeInstructionsByDiagnosis = this._mdmJSON[this._dischargeDiagnosisSectionName]
         this._dischargeInstructionsConstructor = this._mdmJSON[this._dischargeConstructorSectionName]
-        console.log(this._dischargeInstructionsByDiagnosis)
         this._dischargeNoteObj = {} //note sure if this will be used still
         this._dischargeNoteText = ""
         this._dischargeDiagnosisOrder = []
