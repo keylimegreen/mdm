@@ -3,75 +3,179 @@
     {
         "chest pain": {
             "keywords" : ["chest pain", "cp", "chest"],
-            "hpi-constructor": ["age","pmhx", "duration", "location", "severity", "triggers", "quality", "risk-factors"],
-            "pe-constructor": ["gen","head","chest","abd","back","ext", "msk", "neuro", "psych"],
-            "mdm-constructor": ["ekg","acute coronary syndrome","pulmonary embolism","aortic dissection", "boerhaaves","pneumonia", "pneumothorax"],
-            "discharge": "Please return to the emergency room if you develop concerning symptoms including but not limited to worsening chest pain, difficulty breathing, passing out, severe dizziness, or any other new or worsening acute concerns."
-        }
-    },
-    "hpi-contructor": {
-        "age":"Patient is {input}",
-        "pmhx":"with PMHx of {input}",
-        "duration":"Symptoms has lasted {input}",
-        "location":"Localizes the complaint to {input}",
-        "severity":"Rates severity as {input}", 
-        "triggers":"Triggers include {input}", 
-        "quality":"Describes the pain as {input}", 
-        "risk-factors":"Denies risk factors such as {input}",
-        "acute coronary syndrome": ["There is no personal history of cardiac disease. ", " There is no family history of premature cardiac disease. ", " Patient denies significant tobacco use."],
-        "pulmonary embolism": ["Patient denies taking hormones or OCPs. ", "Denies history of cancer. ", "Denies history of VTE. ", "Denies recent immobilization. ", "Denies recent hospitalization, ", " surgery,", " travel."]
+            "hpi-constructor": ["acs", "pe"],
+            "pe-constructor": ["gen","head","cvs","resp","abd","back","ext", "msk", "neuro", "psych"],
+            "pe-special":{
+                "cvs": ["no jvd", "no chest wall crepitus", "chest wall nontender"],
+                "ext": ["no peripheral edema", "no calf tenderness or finding of dvt"]
+            },
+            "mdm-differential-constructor": ["acute coronary syndrome","pulmonary embolism","aortic dissection", "boerhaaves","pneumonia", "pneumothorax"],
+            "mdm-constructor": ["EKG","Chest XR","Dispo"],
+            "discharge": ["chest pain"]
+        },
+        "shortness of breath": {
+            "keywords" : ["sob","dyspnea","shortness of breath"],
+            "hpi-constructor": ["acs", "pe"],
+            "pe-constructor": ["gen","head","cvs","resp","abd","back","ext", "msk", "neuro", "psych"],
+            "pe-special":{
+                "cvs": ["no jvd", "no chest wall crepitus", "chest wall nontender"],
+                "ext": ["no peripheral edema", "no calf tenderness or finding of dvt"]
+            },
+            "mdm-differential-constructor": ["acute coronary syndrome","pulmonary embolism","pneumonia", "pneumothorax","anemia","metabolic acidosis","asthma/copd","airway obstruction","congestive heart failure"],
+            "mdm-constructor": ["EKG","Chest XR","Dispo","Additional considerations"],
+            "Additional considerations": "The patient presents with acute shortness of breath. Differential diagnosis is broad and includes the above considerations including pulmonary, cardiac, metabolic, and infectious etiologies. Initial evaluation included a detailed history, physical exam, continuous vital sign monitoring, and appropriate diagnostic testing. Testing did/did not reveal signs of acute life-threatening pathology. The patient's condition {improved/remained stable/deteriorated}. I have considered and reasonably excluded immediate life threats.",
+            "discharge": ["shortness of breath"]
+        },
+        "abdominal pain": {
+            "keywords" : ["abdominal", "abdominal pain", "abd"],
+            "hpi-constructor": ["acs"],
+            "pe-constructor": ["gen","head","cvs","resp","abd","back","ext", "msk", "neuro", "psych"],
+            "pe-special":{
+                "abd": ["no mcburney point sign", "no murphy sign","no pain out of proportion to exam", "no guarding","no rebound"]
+            },
+            "mdm-differential-constructor": ["acute coronary syndrome", "aortic dissection", "appendicitis", "pancreatitis", "acute cholecystitis", "diverticulitis", "uti", "mesenteric ischemia"],
+            "mdm-constructor": ["EKG","Reviewing CT","Dispo"],
+            "discharge": ["abdominal pain"]
+        },
+        "back pain": {
+            "keywords" : ["back", "spinal"],
+            "hpi-constructor": ["spinal epidural abscess", "cauda equina"],
+            "pe-constructor": ["gen","head","cvs","abd","back","ext", "msk", "neuro", "psych"],
+            "pe-special":{
+                "back": ["no diminished sensation in the saddle area","no cva tenderness b/l"],
+                "abd": ["no palp enlarged bladder"]
 
+            },
+            "mdm-differential-constructor": ["aortic dissection", "appendicitis", "osteomyelitis", "epidural abscess", "pe", "uti", "kidney stone"],
+            "mdm-constructor": ["EKG","Review CT", "Dispo"],
+            "discharge": ["low back pain"]
+        }, 
+        "stroke": {
+            "keywords" : ["stroke"],
+            "hpi-constructor": ["stroke", "tPA contraindications"],
+            "pe-constructor": ["gen","head","neck","cvs","abd","back","ext", "msk", "neuro", "psych"],
+            "pe-special":{
+                "neuro": ["alert", "oriented x3", "CN2-12 intact", "normal sensation x4", "normal strength 5/5 in bilateral upper and lower extremity proximal and distal extremities", "normal FTN b/l - no ataxia"]
+            },
+            "mdm-differential-constructor": ["acute coronary syndrome", "aortic dissection", "appendicitis", "pancreatitis", "acute cholecystitis", "diverticultis", "uti", "mesenteric ischemia"],
+            "mdm-constructor": ["EKG","Chest XR","Review CT", "dispo"],
+            "discharge": ["stroke symptoms"]
+        } ,
+        "headache": {
+            "keywords" : ["headache","ha"],
+            "hpi-constructor": ["subarachnoid hemorrhage","meningitis"],
+            "pe-constructor": ["gen","head","neck","cvs","abd","back","ext", "msk", "neuro", "psych"],
+            "pe-special":{
+                "neck":["no nuchal rigidity","neg brudzinski/kernig sign"],
+                "neuro": ["alert", "oriented x3", "CN2-12 intact", "normal sensation x4", "normal strength 5/5 in bilateral upper and lower extremity proximal and distal extremities", "normal FTN b/l - no ataxia"]
+            },
+            "mdm-differential-constructor": ["cerebral venous thrombosis", "subarachnoid hemorrhage", "cerebrovascular dissection", "meningitis","sponataneous intracranial hemorrhage","reversible cerebral vasoconstriction syndrome","migraine"],
+            "mdm-constructor": ["Review CT", "dispo", "Additional considerations"],
+            "Additional considerations": "After careful consideration of high-risk causes of headache, including subarachnoid hemorrhage, meningitis, and other life-threatening etiologies, I believe a serious medical emergency has been reasonably excluded based on the patient’s history, physical exam, and clinical improvement. Given the resolution of symptoms with treatment and absence of red flag findings, the patient's presentation is most consistent with a benign primary headache disorder such as migraine or tension-type headache. The patient is clinically stable and appropriate for discharge with return precautions and outpatient follow-up.",
+            "discharge": ["headache"]
+        } 
     },
-    "mdm-differential": {
+    "hpi-constructor": {
+        "stroke": ["last known well {}","speech changes","vision changes","numbness","weakness","facial droop","gait disturbance"],
+        "subarachnoid hemorrhage": ["recent major head trauma", "history of drug use", "family history of brain aneurysm"],
+        "tPA contraindications":["intracranial hemorrhage on imaging", "history of intracranial hemorrhage","recent intracranial or spinal surgery (within 3 months)","no known intracranial neoplasm or AVM","active internal bleeding","use of direct thrombin or factor Xa inhibitor within 48 hours","severe head trauma or stroke within the last 3 months","recent major surgery or trauma (within 14 days)","recent GI or GU bleeding (within 21 days)"],
+        "acs": ["hx of heart dx", "fam hx of premature heart disease", "significant tobacco use"],
+        "pe": ["hormones/OCPs use", "hx of cancer", "hx of VTE", "recent immobilization", "recent hospitalization", "recent surgery", "recent travel"],
+        "carotid dissection": ["recent cervical manipulation", "whiplash", "MVCs", "rollar coaster rides"],
+        "spinal epidural abscess": ["recent hx of IV drug use", "fevers" , "hx of prior back surgery", "hx of recent infection elsewhere", "immunocompromised state"],
+        "cauda equina": ["urinary retention/incontinence", "fecal incontinence","saddle anesthesia","lower extremity weakness", "severe persistent lower extremity numbness"],
+        "meningitis":["fever reported", "neck stiffness", "known sick contacts", "rash noted", "confusion or disorientation", "recent travel", "history of immunosuppression", "recent history of lumbar puncture or neurosurgical procedures"]
+    },
+    "mdm-differential-constructor": {
         "pulmonary embolism": ["PE was considered but based on the following clinical factors felt to be unlikely: ", "not tachycardic" ,"not hypoxic", "no risk factors", "wells score of {input}","negative d-dimer"],
         "aortic dissection":["AD was considered but based on the clinical factors, felt to be unlikely: ", "normal chest xray without findings suggestive of AD", "duration of symptoms","ADD score of 0"], 
-        "boerhaaves": ["Boerhaaves was considered but no evidence of this based on no crepitus on exam" , "chest xray did not show pneumomediastinum"],
-        "pneumonia":["Careful review of the chest xray showed no evidence of pneumonia","normal wbc", "afebrile", "not hypoxic"],
-        "pneumothorax":["Careful review of the chest xray showed no evidence of ptx. "],
+        "boerhaaves": ["boerhaaves was considered but no evidence of this based on no crepitus on exam" , "chest xray did not show pneumomediastinum"],
+        "pneumonia":["careful review of the chest xray showed no evidence of pneumonia","normal wbc", "afebrile", "not hypoxic"],
+        "pneumothorax":["careful review of the chest xray showed no evidence of ptx."],
         "acute coronary syndrome":["ACS was considered but felt to be less likely given ", "atypical symptoms, ", "heart score of {input}"],
-        "appendicitis": ["Patient has no significant abdominal tenderness." , "Patient has tolerated oral intake", "CT scan is negative"]
+        "appendicitis": ["no significant RLQ abd tenderness." , "tolerated oral intake", "CT scan is negative"],
+        "mesenteric ischemic":["no risk factors for vascular disease", "no history of hypercoagulability", "no pain out of proportion to exam"],
+        "subarachnoid hemorrhage": ["no thunderclap headache evaluation","no neck stiffness or photophobia","Normal mental status and GCS","No history of trauma or exertional trigger","neg Non-contrast head CT performed within 6 hours of onset","Low risk per Ottawa SAH rule (if applied)","No red flags such as syncope, seizure, or vomiting","LP not performed due to shared decision making and low pre-test probability"],
+        "cerebral venous thrombosis": ["no hypercoaguable state", "recent pregnancy","no papilledema", "no focal neurologic deficits"],
+        "meninigitis": ["no fever", "no nuchal rigidity/meningismus on exam","no ill appearance","no high risk historical features like exposures to tick bites", "no meninigoccemia rash","no recent sick contact exposures"]
     },
     "mdm-constructor":
     {
-        "Collateral Info": ["patient", "family", "chart", "EMS"],
-        "Differential": "Differential diagnosis considered includes {} amongnst other emergent pathology.",
-        "Chest XR": "Chest xray were reviewed by me as NAD. ",
-        "Radiographs": "{input} were reviewed by me as NAD. ",
-        "Reviewing CT": "Ct scans were reviewed by me and I agree with the radiologist interpretation",
-        "EKG": ["EKG obtained at {input} showed ", ["NSR","A fib","sinus tachy", "sinus brady"], ["no ischemic changes","nonspecific changes", "ST depressions", "ST elevations"],["normal intervals","prolonged QRS", "prolonged QT", "first degree block"]],
-        "Testing Deferred": "considered the following tests {} but deferred due to patient preference or shared decision making",
+        "Additional considerations": "(additional considerations)",
+        "Collateral": [["patient", "family", "chart", "EMS"]],
+        "Interpreter": [["spanish","haitian creole","portugese", "{}"], "interpreter was used to obtain this history and exam"],
+        "Differential": "Differential diagnosis considered includes (insert differential) amongnst other emergent pathology.",
+        "EKG": ["EKG obtained at {time} showed ", ["NSR","A fib","sinus tachy", "sinus brady"], ["no ischemic changes","nonspecific changes", "ST depressions", "ST elevations"],["normal intervals","prolonged QRS", "prolonged QT", "first degree block"]],
+        "Cardiac monitoring": "patient was placed on cardiac monitoring during the majority of their ED stay and no significant events were noted",
+        "Chest XR": "Chest xray were reviewed by me as no acute disease. ",
+        "Radiographs": "{xrays} were reviewed by me as no acute disease. ",
+        "Review CT": "Ct scans were reviewed by me and I agree with the radiologist interpretation",
+        "Ultrasound": "Bedside ultrasound was used to {}",
+        "Consulted": [["(blank)","Cardiology", "General Surgery", "Orthopedics", "Neurology", "Behavioral Health","Neurosurgery", "OBGYN", "Pediatrics", "Psychiatry", "Urology", "Gastroenterology", "Pulmonology", "Hematology/Oncology", "Infectious Disease", "Nephrology", "ENT", "Ophthalmology", "Trauma Surgery", "Vascular Surgery", "Rheumatology", "Poison control", "ICU", "Anesthesiology"]],
+        "Testing deferred": "I considered the following tests {} but deferred due to patient preference or shared decision making",
+        "Shared decision": "I used shared decision making after discussing risks and benefits with the patient: {}",
+        "Discussed incidental findings": "Incidental findings were discussed with the patient. Emphasized the importance of outpatient follow-up to further evaluate and exclude malignancy or other nonemergent but significant pathology.",
+        "Dispo": {
+            "Home": "Patient was discharged home after careful consideration of the above differential diagnosis and ruling out or excluding a serious medical or surgical diagnosis of the cause of the patient's presenting chief complaint. Patient is without ill appearance, appears comfortable, and has stable or improving vital signs during the majority of their care in the ED", 
+            "Admission": "Based on the patient’s clinical presentation, diagnostic findings, and response to treatment, admission to the hospital is warranted for further monitoring, management, and/or specialty consultation. The decision to admit was made after consideration of the patient's ongoing symptoms, abnormal findings, and risk for clinical deterioration. I discussed the case with the admitting team, and the plan of care was reviewed. The patient and/or family were informed of the need for hospitalization and agreed with the plan.",
+            "Transfer": "Due to the need for a higher level of care, specialty services not available at our facility, or resource limitations, the decision was made to transfer the patient. The receiving facility, {facility} was contacted, and Dr. {physician} accepted the transfer, and a report was given at {time} . Risks and benefits of transfer were discussed with the patient and/or family, and informed consent was obtained. The patient is stable for transfer, and appropriate documentation and transport arrangements were made.",
+            "SNF": "Patient evaluated and determined to be medically stable but would benefit from rehabilitation, or assistance with activities of daily living beyond the capabilities of home support. After coordination with case management, an appropriate SNF was identified. Patient and/or family were involved in the decision-making process and consented to the plan. Medical stability confirmed prior to transfer, and arrangements for safe transport and continuity of care were completed.",
+            "LWBS": "Patient registered and was triaged by nursing staff but left the emergency department prior to being evaluated by a provider. A search of the facility was conducted and the patient could not be located. No further evaluation or treatment was rendered.",
+            "Elopement - no re-eval": "Patient was undergoing evaluation in the emergency department but left the treatment area without notifying staff or completing the recommended medical assessment and treatment at approximately {time} . Security was notified and a search of the facility was conducted. The patient was unable to be located. At the time of elopement, the patient’s capacity to make medical decisions could not be reassessed. {Risks of incomplete evaluation and potential for clinical deterioration were discussed earlier in the visit as appropriate.}",
+            "Elopement - re-eval": " At approximately {time} - patient informed staff of intent to leave prior to completing full evaluation and treatment. I reassessed the patient and, based on their clinical course and presentation, determined that they possessed decision-making capacity without concerns for altered mental status, clinically significant intoxication. Despite my recommendation to remain for further evaluation and possible treatment, the patient declined. After attempting to discuss the risks of leaving, including potential for clinical deterioration or missed diagnosis, the patient continued to wish to leave. As they demonstrated capacity and were not subject to any legal or medical holds, I did not have the authority to detain them. Departure was documented as elopement with informed refusal.",
+            "Against Medical Advice": "At {time}, after a thorough discussion, the patient elected to leave against medical advice. I reviewed the recommended diagnostic workup and/or treatments that remain incomplete or uninitiated, including {insert key elements}. I carefully evaluated the patient’s capacity to make medical decisions; they demonstrated understanding of the situation, including the potential risks of leaving without further care. These risks were explained in detail, including the possibility of worsening condition, delayed diagnosis, permanent disability, or death. The patient verbalized understanding and made an informed decision to leave. All questions were answered, and the patient was encouraged to return for any worsening symptoms. Discharge instructions and follow-up recommendations were provided to the extent possible."
+        },
+        "Discussed Return Precautions": "Patient was advised to return to the emergency department for any worsening symptoms, new concerns, or if condition does not improve as expected. Patient and/or family verbalizes understanding of the above.",
         "Critical Care": "Critical Care Procedure Note\nAuthorized and Performed by: {MD Name}\nTotal critical care time: Approximately {30} minutes\nDue to a high probability of clinically significant, life threatening deterioration, the patient required my highest level of preparedness to intervene emergently and I personally spent this critical care time directly and personally managing the patient. This critical care time included obtaining a history; examining the patient; pulse oximetry; ordering and review of studies; arranging urgent treatment with development of a management plan; evaluation of patient's response to treatment; frequent reassessment; and, discussions with other providers.\nThis critical care time was performed to assess and manage the high probability of imminent, life-threatening deterioration that could result in multi-organ failure. It was exclusive of separately billable procedures and treating other patients and teaching time."
-        
     },
-
     "pe-constructor": 
     {
         "gen": ["well appearing", "well dressed","no acute distress", "normal build"],
         "head": ["atraumatic", "normocephalic"],
-        "eye": ["normal vision","conjunctiva normal","no orbital swelling", "no nystagmus", "EOM intact"],
-        "ear": ["external ear normal","EAC unremarkable","TM unremarkable b/l"],
+        "eyes": ["normal vision","conjunctiva normal","no orbital swelling", "no nystagmus", "EOM intact"],
+        "ears": ["external ear normal","EAC unremarkable","TM unremarkable b/l"],
         "mouth": ["dentition normal", "normal phonation", "no trimsus", "posterior oropharynx unremarkable", "uvula midline", "tonsils normal", "no peritonsillar swelling"],
         "nose": ["external nose normal"],
-        "neck": ["no nuchal rigidity"],
-        "chest": ["chest wall nontender","no murmurs, rubs, gallops","RRR"],
+        "neck": ["no nuchal rigidity", "no c spine tenderness", "normal neck ROM"],
+        "cvs": ["chest wall nontender","no murmurs, rubs, gallops","RRR"],
+        "resp":["lungs clear", "no wheezing", "no rhonchi", "no crackles"],
         "abd": ["no abdominal tenderness", "no distention", "no masses", "no hernias"],
+        "gu": ["no hernias","normal gu exam"],
         "back": ["no focal midline spinal tenderness", "no cva tenderness b/l"],
         "ext": ["no tendenress", "no swelling", "normal ROM", "no palp masses", "compartments are soft", "peripheral pulses normal"], 
         "msk": ["normal muscle tone", "normal gait"],
         "neuro":["alert", "oriented x3", "no gross weakness", "face symmetric"],
-        "skin": ["no rashes", "no wounds", "no lesions"],
-        "stroke_neuro":["alert", "oriented x3", "CN2-12 intact", "normal sensation x4", "normal strength 5/5 in bilateral upper and lower extremity proximal and distal extremities", "normal FTN b/l - no ataxia"],
-        "ped_neuro": "developmentally appropriate tone, reflexes, gross strength. limited exam due to age",
-        "psych":["no agitation", "normal mood/affect", "no suicidal ideation"],
-        "ped_psych":"developmentally appropriate mood, affect"
+        "skin": ["no rashes", "no wounds", "no lesions","normal cap refill"],
+        "psych":["no agitation", "normal mood/affect", "no suicidal ideation"]
     },
+    "peds-pe-constructor": {
+        "gen": ["well appearing", "well dressed","no acute distress", "normal build"],
+        "head": ["atraumatic", "normocephalic", "anterior fontanelle flat"],
+        "eyes": ["conjunctiva normal","no orbital swelling"],
+        "ears": ["external ear normal","EAC unremarkable","TM unremarkable b/l"],
+        "mouth": ["dentition normal", "normal phonation", "no trimsus", "posterior oropharynx unremarkable", "uvula midline", "tonsils normal", "no peritonsillar swelling"],
+        "neck": ["no nuchal rigidity","no c spine tenderness", "normal neck ROM"],
+        "cvs": ["chest wall nontender","no murmurs, rubs, gallops","RRR"],
+        "abd": ["no abdominal tenderness", "no distention", "no masses", "no hernias"],
+        "gu": ["no hernias","normal gu exam"],
+        "back": ["no focal midline spinal tenderness", "no cva tenderness b/l"],
+        "ext": ["no tendenress", "no swelling", "normal ROM", "no palp masses", "compartments are soft", "peripheral pulses normal"], 
+        "msk": ["normal muscle tone"],
+        "skin": ["no rashes", "no wounds", "no lesions","normal cap refill"],
+        "neuro": ["developmentally appropriate tone", "normal reflexes", "grossly normal strength", "limited exam due to age"],
+        "psych":["developmentally appropriate mood", "affect"]
+    }, 
     "pe-flip": {
-        "well appearing": ["acutely ill appearing", "chronically ill appearing", "well appearing"],
-        "well dressed": ["umkempt","well dressed"],
-        "normal build": ["thin and emaciated", "normal build"],
-        "no acute distress": ["mild distress", "severe distress", "no acute distress"],
-        "no nuchal rigidity": ["no nuchal rigidity, neg brudzinski/kernig sign", "nuchal rigidity present", "no nuchal rigidity"],
-        "alert":["drowsy","lethargic","obtunded","comatose","alert"]
+        "well appearing": ["well appearing","acutely ill appearing", "chronically ill appearing"],
+        "well dressed": ["well dressed","umkempt","disheveled appearing"],
+        "normal build": ["normal build","thin and emaciated"],
+        "no murmurs, rubs, gallops": ["no murmurs, rubs, gallops","+ murmur, no rubs or gallops"],
+        "no acute distress": ["no acute distress","mild distress", "moderate distress","severe distress" ],
+        "no nuchal rigidity": ["no nuchal rigidity", "nuchal rigidity present"],
+        "alert":["alert","drowsy","lethargic","obtunded","comatose","unresponsive"],
+        "no rashes": ["macular","papular","maculopapular","vesicular","pustular","urticarial","bullous","erythematous","purpuric","reticular"],
+        "chest wall nontender": ["chest wall nontender", "chest wall tender to palpation"],
+        "normal gu exam": ["normal gu exam","testicles normal lie, normal cremesteric reflex, no epididymal tenderness, penis and testicles nontender","vulva unremarkable, normal introitus, no cmt, no adnexal tenderness, no significant discharge"]
     },
     "discharge-constructor": {
         "Incidental radiology findings": "Please note that during the course of your emergency room visit we found an indeterminate lesion on your radiology diagnostic testing today. Outpatient follow-up imaging is necessary to further evaluate indeterminate findings identified during emergency radiology studies. These findings may represent early or subtle pathology not fully characterized in the acute setting. Timely follow-up ensures accurate diagnosis, guides appropriate treatment, and helps detect or rule out serious conditions, such as malignancy or evolving disease, that may not be apparent initially. The follow findings need to be followed up on: []",
@@ -82,7 +186,11 @@
         "chest pain": {
             "keywords": ["chest", "cp", "chest pain"],
             "summary": "You were evaluated in the emergency department for chest pain. Your tests do not show a heart attack or other emergency at this time. However, chest pain can have many causes. Return to the ED if you develop worsening or new chest pain, trouble breathing, fainting, weakness, numbness, slurred speech, or a fast or irregular heartbeat. Avoid strenuous activity until cleared. Follow up with your primary care physician within 3–5 days to review your evaluation and plan further care."
-        },            
+        },
+        "headache": {
+            "keywords": ["headache"],
+            "summary": "Discharge Instructions – Headache\nDiagnosis: Likely migraine or tension-type headache.\nWhat to Expect:\n- Headaches may recur intermittently.\n- Over-the-counter pain relievers such as ibuprofen or acetaminophen can help relieve symptoms.\n- Rest, hydration, and stress management may reduce recurrence.\nWhen to Return to the Emergency Department:\n- Sudden onset of a severe headache (\"worst headache of your life\")\n- Headache associated with fever, stiff neck, confusion, vision changes, or weakness/numbness\n- New or worsening headaches not relieved by medication\n- Vomiting that prevents keeping fluids or medications down\nFollow-up:\n- Follow up with your primary care physician or neurologist within 1 week.\n- Consider headache diary to track frequency and triggers.\nMedications:\n- [List medications provided or recommended, e.g., sumatriptan, naproxen, etc."
+        },             
         "diverticulitis": {
             "keywords": ["diverticulitis"], 
             "summary": "You were treated in the emergency department for diverticulitis, which is inflammation or infection of small pouches in your colon. You have been prescribed antibiotics and may need to follow a low-fiber or clear liquid diet temporarily. Return to the ED if you experience worsening abdominal pain, fever, vomiting, inability to eat or drink, or signs of spreading infection. Gradually resume a regular diet as tolerated. Follow up with your primary care physician within 2–3 days to assess your response to treatment and determine if further imaging or specialist referral is needed. You will likely need to follow up with a gastroenterologist for possible colonoscopy once your symptoms have improved."
@@ -110,6 +218,72 @@
         "back pain": {
             "keywords": ["back", "back pain"],
             "summary": "You were evaluated today for back pain and are being discharged in stable condition. At this time, no emergency cause has been identified, but it’s important to monitor your symptoms closely. Return to the emergency department immediately if you experience worsening or severe pain, new weakness or numbness in your legs, loss of bladder or bowel control, fever, or difficulty walking. Avoid heavy lifting, prolonged sitting or standing, and strenuous activity until symptoms improve. Use any prescribed or recommended medications as directed for pain relief. Apply ice or heat as needed. Follow up with your primary care physician within 3–5 days for further evaluation and management. Seek medical care sooner if symptoms worsen or new concerns arise."
+        }
+    }, 
+    "procedure-note": {
+        "lateral canthotomy": {
+            "keywords:": ["lateral canthotomy"],
+            "summary": "Indication: Suspected orbital compartment syndrome due to trauma with proptosis and elevated intraocular pressure threatening vision.\nConsent: Informed consent was obtained from the patient/patient's surrogate. Risks, benefits, and alternatives were discussed.\nProcedure Details:\nThe patient was placed in a supine position. The affected eye was prepped and draped in a sterile fashion. Local anesthetic lidocaine was administered to the lateral canthus. Tissue was devascularized with a hemastat clamp for at least 60 seconds. Using iris scissors, a full-thickness incision was made at the lateral canthus. The feinrior lateral canthal crus was identified and transected with scissors. Hemostasis was achieved.\nFindings: Immediate decrease in proptosis and reduction in intraocular pressure.\nComplications: None."
+        },
+        "laceration repair": {
+            "keywords": ["lac repair","laceration","laceration repair"],
+            "summary": "Laceration length measured and area prepped in sterile fashion. Local anesthesia using {lidocaine} administered. Foreign bodies in the wound were ruled out after careful examination of the wound bed in a bloodless field. Wound edges approximated using {suture type/size} in {simple/intermediate/complex} closure. Hemostasis achieved. Patient tolerated procedure well. Neurovascular status post procedure remained intact. Wound care instructions given. Return precautions for signs of infection were verbalized"
+        }, 
+        "lumbar puncture": {
+            "keywords": ["lp", "lumbar", "lumbar puncture"],
+            "summary": "Signed consent after discussing benefits and risk including infection, bleeding, paralysis, headache, etc. Patient positioned in {lateral decubitus}. Skin prepped and draped in sterile fashion. Local anesthesia with lidocaine. Spinal needle inserted at L3–L4 interspace with {clear} CSF obtained. Opening pressure measured at {}. CSF collected in sterile tubes. Patient tolerated procedure well. No immediate complications observed."
+        },
+        "cpr": {
+            "keywords": ["cpr"],
+            "summary": "High-quality CPR initiated with chest compressions per ACLS protocol. Airway secured and ventilations provided with BVM. Cardiac rhythm monitored continuously. Reversible causes systematically evaluated, including hypoxia, hypovolemia, hydrogen ion (acidosis), hypo/hyperkalemia, hypothermia, tension pneumothorax, tamponade, toxins, and thrombosis (cardiac/pulmonary). No immediate reversible cause identified. Resuscitation efforts continued appropriately. Please review code sheet for details including IV medication administration."
+        },
+        "intubation": {
+            "keywords": ["intubation"],
+            "summary": "Patient required airway protection due to {respiratory failure and airway protection}. Pre-oxygenated with 100% O₂ via non-rebreather. Sedation and paralytics administered per rapid sequence intubation protocol with {ketamine and rocuronium}. Endotracheal tube placed under {video} laryngoscopy with visualization of vocal cords. Tube placement confirmed by end-tidal CO₂, auscultation of bilateral breath sounds, and chest rise. Tube secured at {x} cm at the teeth. No complications encountered. Post-intubation sedation initiated."
+        },
+        "procedural sedation": {
+            "keywords": ["procedural sedation", "procedural"],
+            "summary": "Patient required procedural sedation for {reduction}. Informed consent obtained. Airway, last meal assessed and appropriate equipment at bedside. Cardiac monitoring, pulse oximetry, and continuous end-tidal CO₂ used throughout. Time out performed. Sedation administered using {ketamine} titrated to effect. Procedure completed without complication. Patient maintained spontaneous respirations and stable vital signs. Recovered uneventfully to baseline mental status. Disposition: discharged home in stable condition once patient was able to maintain alertness and orientation, tolerate oral intake, ambulate with steady gait, and with adult supervision/driver."
+        },
+        "splinting": {
+            "keywords": ["splint", "splinting"],
+            "summary": "Limb evaluated for neurovascular status prior to splinting. {type of splint} applied to immobilize {injury/fracture site}. Limb positioned in proper alignment. Neurovascular status reassessed post-application and remained intact. Patient tolerated procedure well. Compartment syndrome return precautions and splint removal instructions provided."
+        }, 
+        "reduction": {
+            "keywords": ["reduction"],
+            "summary": "Neurovascular status assessed pre-reduction. Informed consent obtained. {Joint/fracture} reduction performed using {technique}. Successful reduction confirmed by clinical exam and post-reduction imaging. Neurovascular status intact post-procedure. Patient tolerated the procedure well. Immobilization applied and post-reduction care instructions provided."
+        }, 
+        "paracentesis": {
+            "keywords": ["paracentesis"],
+            "summary": "Informed consent obtained after discussing risk of infection, bleeding, bowel injury. Patient positioned supine with the head of the bed elevated. Abdomen prepped and draped in sterile fashion. Local anesthesia administered at the insertion site. Ultrasound guidance used to identify fluid pocket. Needle/catheter inserted into the peritoneal cavity and {x} mL of ascitic fluid aspirated. Fluid sent for analysis. No immediate complications noted. Patient tolerated procedure well."
+        }, 
+        "arthrocentesis": {
+            "keywords": ["arthrocentesis"],
+            "summary": "Informed consent obtained after discussing risk of vascular injury, bleeding, infection. Joint area prepped and draped in sterile fashion. Local anesthesia administered at the insertion site. Needle inserted into the [joint name, e.g., knee, shoulder] joint space under aseptic technique. {cc} of {color} synovial fluid aspirated successfully and sent for analysis. No immediate complications observed. Patient tolerated procedure well."
+        }, 
+        "delivery": {
+            "keywords": ["delivery"],
+            "summary": "Patient found to be in active labor with imminent delivery deemed unstable for transfer to L/D. Spontaneous vaginal delivery achieved without complications. Perineal area inspected and repaired for {} lacerations. Neonate delivered with Apgar scores of {x} and {y} at 1 and 5 minutes. Estimated blood loss within normal limits. Mother and infant stable post-delivery."
+        }, 
+        "thoracentesis": {
+            "keywords": ["thoracentesis"],
+            "summary": "Neurovascular status assessed pre-reduction. Informed consent obtained. {Joint/fracture} reduction performed using {technique}. Successful reduction confirmed by clinical exam and post-reduction imaging. Neurovascular status intact post-procedure. Patient tolerated the procedure well. Immobilization applied and post-reduction care instructions provided."
+        }, 
+        "chest tube": {
+            "keywords": ["chest tube", "pigtail"],
+            "summary": "Informed consent obtained after discussing risk of lung injury, vascular injury, intraabdominal injury, infection, bleeding. Patient positioned supine with arm abducted. Skin prepped and draped using sterile technique. Local anesthesia administered. A small incision was made at the appropriate intercostal space. Blunt dissection performed to enter the pleural space. A {pigtail/chest tube/size} was inserted, secured, and connected to appropriate drainage. Correct placement confirmed by clinical improvement and imaging. No immediate complications noted. Patient tolerated procedure well."
+        }, 
+        "pericardiocentesis": {
+            "keywords": ["pericardiocentesis"],
+            "summary": "Informed consent obtained. Patient positioned supine with slight head elevation. Skin prepped and draped in sterile fashion. Local anesthesia administered at the subxiphoid area. Under ultrasound guidance, a needle was inserted into the pericardial space, and pericardial fluid was aspirated. Fluid sent for analysis. Hemodynamic improvement observed. No immediate complications. Patient tolerated procedure well."
+        }, 
+        "central line": {
+            "keywords": ["central line", "cvc"],
+            "summary": "Informed consent obtained after discussing risks and benefits, including lung injury, vascular injury, bleeding, infection. Patient positioned to distend veins and reduce risk of air emboli. {site} prepped and draped using full sterile technique. Local anesthesia administered. Under ultrasound guidance, a needle was inserted into the target vein, followed by guidewire placement. A central venous catheter was advanced over the wire and secured in place. Proper placement confirmed by blood return in all 3 ports and chest xray if not a femoral line. No immediate complications observed. Patient tolerated procedure well."
+        }, 
+        "arterial line": {
+            "keywords": ["arterial", "a line", "arterial line"],
+            "summary": "Informed consent obtained after discussing risks and benefits, including limb injury, vascular injury, bleeding, infection. Allen test performed if radial line. Patient positioned appropriately with {} prepared and draped in sterile fashion. Local anesthesia administered at the insertion site. Under ultrasound guidance, a catheter was successfully inserted into the {radial/femoral/brachial} artery using sterile technique. Catheter secured and waveform confirmed via arterial pressure monitoring. No immediate complications observed. Patient tolerated procedure well."
         }
     },
     "transfer-list": {
@@ -163,15 +337,21 @@
             },
             "ST VINCENTS HOSPITAL": {
                 "keywords": ["ST", "VINCENTS", "STV", "SVH"],
-                "phone-num": "",
+                "phone-num": "833-558-3638",
                 "address": "123 Summer Street",
                 "city": "Worcester"
             }, 
             "BMC BRIGHTON / ST ELIZABETHS": {
                 "keywords": ["ST", "ELIZABETH", "E", "BMC", "BRIGHTON", "ELIZABETHS"],
-                "phone-num": "617.789.3000 (need to update)",
+                "phone-num": "617.789.5000 (need to update?)",
                 "address": "255 Washington St",
                 "city": "Brighton"
+            },
+            "MASS EYE AND EAR": {
+                "keywords": ["MEE", "EYE", "MASS EYE AND EAR"],
+                "phone-num": "617-573-3431",
+                "address": "243 Charles St",
+                "city": "Boston"
             }
         }
     }

@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  defer></script>
   <style>
     .navbar-nav .nav-link.active {
       font-weight: bold;
@@ -17,8 +21,8 @@
   </style>
   
 </head>
-<body class="bg-light">
-
+<body class="bg-light pt-5">
+  <div class = "pt-3"></div>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
     <div class="container">
@@ -30,6 +34,7 @@
         <ul class="navbar-nav ms-auto" id="navbarNav">
           <li class="nav-item"><a class="nav-link" href="#mdm-section">MDM</a></li>
           <li class="nav-item"><a class="nav-link" href="#discharge-section">Discharge</a></li>
+          <li class="nav-item"><a class="nav-link" href="#procedure-note-section">Procedure Note</a></li>
           <li class="nav-item"><a class="nav-link" href="#transfer-section">Transfer</a></li>
           <li class="nav-item"><a class="nav-link" href="#edit-section">Edit</a></li>
         </ul>
@@ -37,47 +42,67 @@
       </div>
     </div>
   </nav>
-<div class="container" id="main-content" style="margin-top: 50px;">
   <!-- User search Section -->
-  <section class="py-5 text-center">
-    <div class="container" id="search-section">
+  <section class="p-1 text-center">
+    <div class="scrollspy-example  p-1" data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="0" tabindex="0" id="search-section">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="chief complaint" aria-label="search-box" aria-describedby="basic-addon2">
+        <input type="text" class="form-control" id="search-chief-complaint-input" placeholder="Enter age and complaint in order of significance" aria-label="search-box" aria-describedby="basic-addon2">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button">Auto Note</button>
+          <button class="btn btn-outline-secondary" type="button" id="mdm-create-note-btn">Create Note</button>
+          <button class="btn btn-outline-secondary" type="button" id="mdm-clear-all-btn">Clear All</button>
         </div>
-    </div>
+      </div>
+      <div id="mdm-search-msg-div"></div>
     </div>
   </section>
-
   <!-- Content Section -->
-  <section class="py-5 scrollspy-example" data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="0" tabindex="0">
+  <section class="scrollspy-example p-1" data-bs-spy="scroll" data-bs-target="#navbarNav" id="mdm-section" data-bs-offset="0" tabindex="0">
+    <!-- MDM Creator -->
     <div class="container">
-        <!-- MDM Creator -->
-        <div class="bg-white shadow-sm" id="mdm-section">
-          <h2 class="fw-bold">MDM</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <!-- HPI Section -->
+        <h4 class="bg-white shadow-sm">
+          <button class="btn btn-link p-0" id="hpi-section-head-btn">History</button>
+          </h4>
+            <textarea class="bg-light p-3 rounded form-control flex-grow-1" id="hpi-summary-input"> </textarea>
+            <div class="row g-2" id="hpi-section-container"></div>
+          <!-- PE Section -->
+          <h4 class="bg-white shadow-sm">
+            <button class="btn btn-link p-0" id="pe-section-head-btn">Physical Exam</button>
+          </h4>
+            <div class="row g-2" id="pe-section-container"></div>
+          <!-- MDM Section -->
+          <h4 class="bg-white shadow-sm">
+            <button class="btn btn-link p-0" id="mdm-section-head-btn">Medical Decision Making</button>
+          </h4>
+            <div class="row g-2" id="mdm-section-container"></div>
+         <!--MDM Output -->
+
+         <button class="btn btn-primary" id="mdm-note-btn">Generate Note</button>
+         
+          <textarea id="mdm-output-textarea" class="bg-light p-3 rounded form-control flex-grow-1"></textarea>
+        
+        <!-- Generate Note Button -->
+        <div class="mt-4">
+            <button class="btn btn-secondary" id="mdm-next-btn">Next Field</button>
+            <button class="btn btn-secondary" id="mdm-copy-btn">Copy Note</button>
+        </div>
+        </div>
         </div>
 
         <!-- Discharge Note -->
         <div class="container">
         <div class="bg-white shadow-sm" id="discharge-section">
           <!-- Discharge Note search input -->
-          <div class="input-group mb-3">
-            <H3>Discharge Note Search</h3>
-            <div>
-              <input class="form-control" list="discharge-datalist-options" id="discharge-datalist-input" placeholder="Type to search...">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <h4 class="mb-0">Discharge Note Search</h4>
+              <input class="form-control" list="discharge-datalist-options" id="discharge-datalist-input" placeholder="Type to search..." style="max-width: 300px;">
               <datalist id="discharge-datalist-options"></datalist>
-              <div class="input-group-append">
               <button class="btn btn-outline-secondary" type="button" id="discharge-note-search-btn">Search</button>
-              </div>
             </div>
-          </div>
           <div id="discharge-search-result-group"></div>
           <form id="discharge-checkbox-group"></form>
             <!-- Discharge Note textbox output -->
           <div>
-            <h4 class="fw-bold">Discharge Note Output</h4>
             <textarea class="w-100" placeholder="discharge note output" id="discharge-note-output"></textarea>
           </div>
           <!--Discharge Note Copy and Translate buttons-->
@@ -98,8 +123,27 @@
           </div>
           </div>
         </div>
-        
-        
+<!-- Procedure Note Section -->
+<div class="bg-white shadow-sm" id="#procedure-note-section">
+  <!-- Discharge Note search input -->
+  <div class="d-flex align-items-center gap-2 mb-2">
+    <h4 class="mb-0">Procedure Note Search</h4>
+    <input class="form-control" list="procedure-note-datalist-options" id="procedure-note-datalist-input" placeholder="Type to search..." style="max-width: 300px;">
+    <datalist id="procedure-note-datalist-options"></datalist>
+    <button class="btn btn-outline-secondary" type="button" id="procedure-note-search-btn">Search</button>
+  </div>
+    
+  <div id="procedure-note-search-message-box"></div>
+    <!-- Procedure Note textbox output -->
+  <div>
+    <textarea class="w-100" placeholder="procedure note output" id="procedure-note-output"></textarea>
+  </div>
+  <!--Procedure Note Copy and Translate buttons-->
+  <div>
+    <button class="btn btn-outline-secondary" type="button" id="procedure-note-clear-btn">Clear</button>
+    <button class="btn btn-outline-secondary" type="button" id="procedure-note-next-btn">Next Field</button>
+    <button class="btn btn-outline-secondary" type="button" id="copy-procedure-note-btn" >Copy</button>      
+  </div>      
 <!-- Transfer Section -->
 <div id="transfer-section" class="py-5 bg-white shadow-sm">
   <div class="container">
